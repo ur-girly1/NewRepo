@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ur-girly1's GitHub</title>
+  <style>
+    /* CSS embedded */
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      color: #c9d1d9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: black;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .content {
+      text-align: center;
+      z-index: 1;
+    }
+
+    a {
+      text-decoration: none;
+      color: #58a6ff;
+      font-size: 1.5rem;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      color: #1f6feb;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+  <div class="content">
+    <h1>Hello! I'm ur-girly1</h1>
+    <p>Check out my GitHub profile:</p>
+    <a href="https://github.com/ur-girly1" target="_blank">GitHub</a>
+  </div>
+  <script>
+    // JS embedded
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    const stars = [];
+    const numStars = 200;
+
+    for (let i = 0; i < numStars; i++) {
+      stars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 1.5,
+        speed: Math.random() * 0.5 + 0.1
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = 'white';
+      for (let star of stars) {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        star.y -= star.speed;
+        if (star.y < 0) {
+          star.y = height;
+          star.x = Math.random() * width;
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    animate();
+  </script>
+</body>
+</html>
